@@ -14,92 +14,93 @@ import controller.todo.*;
 public class RequestMapping {
     private static final Logger logger = LoggerFactory.getLogger(DispatcherServlet.class);
     
-    // °¢ ¿äÃ» uri¿¡ ´ëÇÑ controller °´Ã¼¸¦ ÀúÀåÇÒ HashMap »ý¼º
+    // ï¿½ï¿½ ï¿½ï¿½Ã» uriï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ controller ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ HashMap ï¿½ï¿½ï¿½ï¿½
     private Map<String, Controller> mappings = new HashMap<String, Controller>();
 
     public void initMapping() {
-    	// °¢ uri¿¡ ´ëÀÀµÇ´Â controller °´Ã¼¸¦ »ý¼º ¹× ÀúÀå
+    	// ï¿½ï¿½ uriï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç´ï¿½ controller ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         mappings.put("/", new ForwardController("index.jsp"));
         
-        // ·Î±×ÀÎ
+        // ï¿½Î±ï¿½ï¿½ï¿½
         mappings.put("/user/login/form", new ForwardController("/user/loginForm.jsp"));
         mappings.put("/user/login", new LoginController());
         
-        // È¸¿ø°¡ÀÔ
+        // È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         mappings.put("/user/join", new JoinUserController());
         mappings.put("/user/hbtiTest", new HBTIController());
         mappings.put("/user/hbtiTestResult", new HBTIController());
         
-        // ¸ÞÀÎ ÆäÀÌÁö
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         mappings.put("/main", new MainController());
         
-        // ¸¶ÀÌÆäÀÌÁö (È¸¿ø Á¤º¸ ¼öÁ¤ & È¸¿ø Å»Åð & ±×·ì Å»Åð)
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ (È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ & È¸ï¿½ï¿½ Å»ï¿½ï¿½ & ï¿½×·ï¿½ Å»ï¿½ï¿½)
         mappings.put("/user/myPage", new MyPageController());
         mappings.put("/user/update", new UpdateUserController());
         mappings.put("/user/quit", new QuitUserController());
         mappings.put("/group/quit", new QuitGroupController());
         
-        // ·Î±× ¾Æ¿ô
+        // ï¿½Î±ï¿½ ï¿½Æ¿ï¿½
         mappings.put("/user/logout", new LogoutController());
         
-        // ÅõµÎ Á¶È¸
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¸
          mappings.put("/todo/view", new ViewTodoController());
          mappings.put("/todo/date", new ViewTodoController());
+         mappings.put("/todo/dateOk", new ViewTodoController());
          
-        // ÅõµÎ ¼öÁ¤
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         mappings.put("/todo/modifyForm", new ModifyTodoController());
         mappings.put("/todo/modifyDateForm", new ModifyTodoController());
-        mappings.put("/todo/modify", new ModifyTodoController()); //º¯°æ³»¿ë redirection
-        mappings.put("/todo/date/modify", new ModifyTodoController()); //º¯°æ³»¿ë redirection
+        mappings.put("/todo/modify", new ModifyTodoController()); //ï¿½ï¿½ï¿½æ³»ï¿½ï¿½ redirection
+        mappings.put("/todo/date/modify", new ModifyTodoController()); //ï¿½ï¿½ï¿½æ³»ï¿½ï¿½ redirection
         
         mappings.put("/todo/doCheck", new CheckTodoController());
         mappings.put("/todo/doNotCheck", new CheckTodoController());
-        //ÅõµÎ Ãß°¡
+        //ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
         mappings.put("/todo/addForm", new ForwardController("/todo/addForm.jsp"));
         mappings.put("/todo/add", new AddTodoController());
        
-        //ÅõµÎ »èÁ¦
+        //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         mappings.put("/todo/delete", new DeleteTodoController());
         mappings.put("/todo/date/delete", new DeleteTodoController());
         
-        // ±×·ì ¸ÞÀÎ (°Ë»ö & °¡ÀÔ)
+        // ï¿½×·ï¿½ ï¿½ï¿½ï¿½ï¿½ (ï¿½Ë»ï¿½ & ï¿½ï¿½ï¿½ï¿½)
         mappings.put("/group/main", new ViewGroupController());
         mappings.put("/group/search", new SearchGroupController());
         mappings.put("/group/join", new JoinGroupController());
         
-        // ±×·ì »ý¼º
+        // ï¿½×·ï¿½ ï¿½ï¿½ï¿½ï¿½
         mappings.put("/group/createForm", new ForwardController("/group/createForm.jsp"));
         mappings.put("/group/create", new CreateGroupController());
         
-        // ±×·ì Á¤º¸ ¼öÁ¤ & ±×·ì¿ø °ü¸®
+        // ï¿½×·ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ & ï¿½×·ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         mappings.put("/group/updateForm", new UpdateGroupController());
         mappings.put("/group/update", new UpdateGroupController());
         mappings.put("/group/manageUser", new UpdateGroupController());
         
-        // ±×·ì »èÁ¦
+        // ï¿½×·ï¿½ ï¿½ï¿½ï¿½ï¿½
         mappings.put("/group/delete", new DeleteGroupController());
         
-        // Ã§¸°Áö Á¶È¸
+        // Ã§ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¸
         mappings.put("/challenge/view", new ViewChallengeController());
         mappings.put("/challenge/myView", new ViewChallengeController());
         
-        // Ã§¸°Áö Ãß°¡
+        // Ã§ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
         mappings.put("/challenge/addForm", new AddChallengeController());
         mappings.put("/challenge/add", new AddChallengeController());
         
-        // Ã§¸°Áö ¼öÁ¤
+        // Ã§ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         mappings.put("/challenge/updateForm", new UpdateChallengeController());
         mappings.put("/challenge/update", new UpdateChallengeController());
         mappings.put("/challenge/updateLike_btn", new UpdateChallengeController());
         
-        // Ã§¸°Áö »èÁ¦
+        // Ã§ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         mappings.put("/challenge/delete", new DeleteChallengeController());
        
         logger.info("Initialized Request Mapping!");
     }
 
     public Controller findController(String uri) {	
-    	// ÁÖ¾îÁø uri¿¡ ´ëÀÀµÇ´Â controller °´Ã¼¸¦ Ã£¾Æ ¹ÝÈ¯
+    	// ï¿½Ö¾ï¿½ï¿½ï¿½ uriï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç´ï¿½ controller ï¿½ï¿½Ã¼ï¿½ï¿½ Ã£ï¿½ï¿½ ï¿½ï¿½È¯
         return mappings.get(uri);
     }
 }

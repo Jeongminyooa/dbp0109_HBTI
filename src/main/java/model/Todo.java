@@ -1,7 +1,6 @@
 package model;
 
 import java.util.Date;
-import java.util.List;
 
 public class Todo {
 	private int todo_id;
@@ -9,7 +8,6 @@ public class Todo {
 	private java.sql.Date todo_date;
 	private String user_id;
 	private int is_done;
-	private List<Todo> todoList;
 
 	public Todo() { }
 
@@ -83,22 +81,12 @@ public class Todo {
 		this.is_done = is_done;
 	}
 
-	public List<Todo> getTodoList() {
-		return todoList;
-	}
-
-	public void setTodoList(List<Todo> todoList) {
-		this.todoList = todoList;
-	}
-
 	@Override
 	public String toString() {
 		return "Todo [todo_id=" + todo_id + ", content=" + content + ", todo_date=" + todo_date + ", user_id=" + user_id
-				+ ", is_done=" + is_done + ", todoList=" + todoList + "]";
-	}	
-
+				+ ", is_done=" + is_done + "]";
 	
-	
+	}
 }
 	
 	

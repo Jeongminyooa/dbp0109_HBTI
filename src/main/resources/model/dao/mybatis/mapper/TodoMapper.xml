@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- mapper를 모아놓은 XML 패키지명 : mapper interface와 연관됨 -->
+<mapper namespace="model.dao.mybatis.mapper.TodoMapper">
+
+   <insert id="addTodo">
+      INSERT INTO TODO
+      VALUES (todo_seq.nextval, #{content}, SYSDATE, #{user_id}, 0)
+   </insert>
+
+   <update id="updateTodo">
+      UPDATE TODO 
+      SET content = #{content}
+      WHERE todo_id = #{todo_id}
+   </update>
+
+   <update id="updateIs_done">
+      UPDATE TODO 
+      SET is_done = #{is_done}
+      WHERE todo_id = #{todo_id}
+   </update>
+
+   <delete id="deleteTodo" parameterType="int">
+      DELETE FROM TODO
+      WHERE todo_id = #{todo_id}
+   </delete>
+   
+   <select id="findDateTodoListByUserId" resultType="Todo">
+      <![CDATA[
+       SELECT todo_id, content, todo_date, user_id, is_done
+          FROM TODO
+          WHERE todo_date >= todo_date = #{todo_date} AND todo_date < todo_date = #{todo_date} + 1 AND user_id = #{user_id}
+      ]]>   
+   </select>
+
+
+   <select id="findTodoListByUserId" parameterType="int"
+   resultType="Todo">
+      <![CDATA[
+       SELECT todo_id, content, todo_date, user_id, is_done
+        FROM TODO
+        WHERE todo_date >= TO_DATE(SYSDATE) AND user_id = #{user_id} 
+      ]]>   
+   </select>
+
+   <select id="findTodoByDate" resultType="Todo">
+      <![CDATA[
+       SELECT todo_id, content, todo_date, is_done
+          FROM TODO
+          WHERE todo_date >= todo_date = #{todo_date} AND todo_date < todo_date = #{todo_date} + 1 AND todo_id = #{todo_id} AND user_id = #{user_id} 
+      ]]>   
+   </select>   
+   
+   <select id="findTodoByTodoID" resultType="Todo">
+      <![CDATA[
+       SELECT todo_id, content, todo_date, is_done
+        FROM TODO
+        WHERE todo_date >= TO_DATE(SYSDATE) AND todo_id = #{todo_id} AND user_id = #{user_id}
+      ]]>   
+   </select>
+   
+   <select id="findNotSelectTodoListByDate" resultType="Todo">
+      <![CDATA[
+       SELECT todo_id, content, todo_date, user_id, is_done
+          FROM TODO
+          WHERE todo_date >= todo_date = #{todo_date} AND todo_date < todo_date = #{todo_date} + 1 AND NOT todo_id = #{todo_id} AND user_id = #{user_id} 
+      ]]>   
+   </select>   
+   
+    <select id="findNotSelectTodoList" resultType="Todo">
+      <![CDATA[
+       SELECT todo_id, content, todo_date, user_id, is_done
+          FROM TODO
+          WHERE WHERE todo_date >= TO_DATE(SYSDATE) AND NOT todo_id = #{todo_id} AND user_id = #{user_id}
+      ]]>   
+   </select>  
+   
+   <delete id="deleteUserAllTodo" parameterType="int">
+      DELETE FROM TODO
+      WHERE user_id = #{user_id}
+   </delete>
+   
+   <select id="findDateByTodoID" parameterType="int">
+       SELECT todo_date
+        FROM TODO
+        WHERE todo_id = #{todo_id}
+   </select>
+
+</mapper>

@@ -26,6 +26,10 @@ function searchDate() {
 	form.submit();
 }
 
+function checkTodo(){
+	alert("지난 날짜의 투두는 체크 수정이 불가능합니다.");
+}
+
 </script>
 </head>
 <body>
@@ -52,24 +56,27 @@ function searchDate() {
 	<div class="contents">
 		<p id="sub-title">TODO 날짜 검색</p>
 		<div class="contents-split">
+					<p id="contents-title">
+				 		<fmt:formatDate value="${date}" pattern="yy년 MM월 dd일" /> : TODO LIST
+					</p>
+					<form name="form" action="<c:url value='/todo/date' />">
+					<input type="date" name="todo_date" placeHolder="yy/mm/dd 형식으로 입력">
+					<a onClick="searchDate()" id="a-deco"><i class="fas fa-search"></i></a>
 					<c:if test='${empty todoList}'>
 						<p id="intro"> 해당 날짜에 TODO LIST가 없습니다.!</p>
 					</c:if>
 					<c:forEach var="todo" items="${todoList}" varStatus="status">
 					<c:if test="${status.first}">
-						<p id="contents-title">
-				 		<fmt:formatDate value="${todo.todo_date}" pattern="yy년 MM월 dd일" /> : TODO LIST
-					</p>
 					</c:if>
 						<div class="list-box">
 							<!-- is_done 여부에 따라 다르게 보여줌 -->
 							<div class="list">
 								<c:if test="${todo.is_done eq 1}">
-									<a id="check"><i
-										class="fas fa-check-square"></i></a>
+									<a onClick="checkTodo()" id="check"><i
+									class="fas fa-check-square"></i></a>
 								</c:if>
 								<c:if test="${todo.is_done eq 0}">
-									<a id="check"><i
+									<a onClick="checkTodo()" id="check"><i
 										class="far fa-square"></i></a>
 								</c:if>
 							</div>
@@ -85,10 +92,9 @@ function searchDate() {
 						<div class="split"></div>
 					</c:forEach>
 				<p>
-
+				</form>
 		</div>
 	</div>
-
 	<footer>
 		<ul>
 			<li><p>copyright ⓒ 2021 All rights reserved by 코딩궁딩.</p></li>

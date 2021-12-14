@@ -33,5 +33,6 @@
 		<mapper resource="model/dao/mybatis/mapper/HbtiMapper.xml" />
 		<mapper resource="model/dao/mybatis/mapper/GroupMapper.xml" />
 		<mapper resource="model/dao/mybatis/mapper/PostMapper.xml" />
+		<mapper resource="model/dao/mybatis/mapper/TodoMapper.xml" />
 	</mappers>
 </configuration>

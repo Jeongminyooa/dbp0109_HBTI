@@ -70,6 +70,7 @@ function modifyTodo() {
 					<span><a onClick='modifyTodo()' id="a-deco">&nbsp;수정&nbsp;</a></span>
 					<span>&nbsp;<a id="a-deco_icon" href="<c:url value="/todo/delete">
 									<c:param name="todo_id" value='${selectTodo.todo_id}'/>
+									<c:param name="select_id" value='${select_id}'/>
 									</c:url>"><i class="far fa-trash-alt"></i></a></span></div>
 			</form>
 			<div>
@@ -81,6 +82,7 @@ function modifyTodo() {
 						<a id="a-deco_icon" 
 								href="<c:url value="/todo/delete">
 									<c:param name="todo_id" value='${todo.todo_id }'/>
+									<c:param name="select_id" value='${select_id}'/>
 									<c:param name="todo_date" value='${todo.todo_date }'/>
 									</c:url>"><i class="far fa-trash-alt"></i></a>
 					</div>

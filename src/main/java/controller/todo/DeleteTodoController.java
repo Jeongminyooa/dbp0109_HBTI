@@ -7,17 +7,12 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import model.Todo;
 import model.service.TodoManager;
 import controller.Controller;
 import controller.user.UserSessionUtils;
 
 public class DeleteTodoController implements Controller {
-	private static final Logger log = LoggerFactory.getLogger(DeleteTodoController.class);
-
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String user_id =  UserSessionUtils.getLoginUserId(request.getSession());
@@ -28,14 +23,20 @@ public class DeleteTodoController implements Controller {
 			
 			int deleteId = Integer.parseInt(request.getParameter("todo_id"));
 			manager.delete(deleteId);
-			
-			Todo selectTodo = manager.findTodo(deleteId, user_id);
+		
+			int selectId = Integer.parseInt(request.getParameter("select_id"));
+			Todo selectTodo = manager.findTodo(selectId, user_id);
 			request.setAttribute("selectTodo", selectTodo);
-			
-			List<Todo> todoList = manager.findNotSelectTodoList(deleteId, user_id);
+
+
+			List<Todo> todoList = manager.findNotSelectTodoList(selectId, user_id);
 			request.setAttribute("todoList", todoList);	
-	
-			return "/todo/modifyForm.jsp";  
+			
+			request.setAttribute("select_id", selectId);
+			
+			
+			return "/todo/modifyForm.jsp"; 
+			
 		 }
 		 
 		 else {
@@ -44,16 +45,20 @@ public class DeleteTodoController implements Controller {
 				manager.delete(deleteId);
 			
 				String date = request.getParameter("todo_date");
-	     		
+				int selectId = Integer.parseInt(request.getParameter("select_id"));
+				
 	     		SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd");
 	     		Date todo_date = (Date) sdf.parse(date);
 	    
 	     		
-				Todo selectTodo = manager.findTodo(todo_date, deleteId, user_id);
+				Todo selectTodo = manager.findTodo(todo_date, selectId, user_id);
 	     		request.setAttribute("selectTodo", selectTodo);
 	     		
-	 			List<Todo> todoList = manager.findNotSelectTodoList(todo_date, deleteId, user_id);
+	 			List<Todo> todoList = manager.findNotSelectTodoList(todo_date, selectId, user_id);
 	 			request.setAttribute("todoList", todoList);	
+	 			request.setAttribute("date", todo_date);	
+	 			
+	 			request.setAttribute("select_id", selectId);
 		
 				return "/todo/modifyDateForm.jsp";  
 			 }

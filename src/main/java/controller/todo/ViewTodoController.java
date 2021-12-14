@@ -3,6 +3,7 @@ package controller.todo;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,11 +26,11 @@ public class ViewTodoController implements Controller {
 			List<Todo> todoList = manager.findTodoList(user_id);				
 		
 			request.setAttribute("todoList", todoList);
-			// 투두가 하나라도 있다면
+
 			return "/todo/main.jsp";	
 		}
 		
-		else {
+		else if(request.getServletPath().equals("/todo/date")){
 			
 		String searchDate = request.getParameter("todo_date");
 		
@@ -40,9 +41,30 @@ public class ViewTodoController implements Controller {
 		
 		List<Todo> todo = manager.findDateTodoList(date, user_id);
 		request.setAttribute("todoList", todo);
+		request.setAttribute("date", date);
 		
 		return "/todo/dateResult.jsp";
 		}
-	
+		
+		else {
+			String date = request.getParameter("date");
+			
+			SimpleDateFormat recvSimpleFormat = new SimpleDateFormat("E MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);
+			Date data = recvSimpleFormat.parse(date);
+
+			SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd");
+			
+			String d = sdf.format(data);
+			
+			Date todo_date = (Date) sdf.parse(d);
+		
+			List<Todo> todo = manager.findDateTodoList(todo_date , user_id);
+			request.setAttribute("todoList", todo);
+			request.setAttribute("date", todo_date);
+			
+			return "/todo/dateResult.jsp";
+			
+		}
+		
     }
 }

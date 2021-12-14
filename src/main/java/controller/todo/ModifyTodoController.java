@@ -38,7 +38,8 @@ public class ModifyTodoController implements Controller {
 				
 				Date todo_date = manager.findDate(todo_id);
 	 			List<Todo> todoList = manager.findDateTodoList(todo_date, user_id);
-	 			request.setAttribute("todoList", todoList);	
+	 			request.setAttribute("todoList", todoList);		
+	 			request.setAttribute("date", todo_date);
 	 			
 				return "/todo/dateResult.jsp";
     	 }
@@ -46,11 +47,14 @@ public class ModifyTodoController implements Controller {
  	
     	 else if (request.getServletPath().equals("/todo/modifyForm")){
     		 
-    		// ¼±ÅÃÇÑ ¼öÁ¤ ÅõµÎÀÇ Á¤º¸
+    		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     		int todo_id = Integer.parseInt(request.getParameter("todo_id"));
     	
     		Todo selectTodo = manager.findTodo(todo_id, user_id);
     		request.setAttribute("selectTodo", selectTodo);
+    		
+    		int select_id = todo_id;
+    		request.setAttribute("select_id", select_id);
     		
 			List<Todo> todoList = manager.findNotSelectTodoList(todo_id, user_id);
 			request.setAttribute("todoList", todoList);	
@@ -59,7 +63,7 @@ public class ModifyTodoController implements Controller {
     	 }
     	 
     	 else {
-    		 int todo_id = Integer.parseInt(request.getParameter("todo_id"));
+    		int todo_id = Integer.parseInt(request.getParameter("todo_id"));
     	    	
      		String date = request.getParameter("todo_date");
      		
@@ -69,8 +73,12 @@ public class ModifyTodoController implements Controller {
      		Todo selectTodo = manager.findTodo(todo_date, todo_id, user_id);
      		request.setAttribute("selectTodo", selectTodo);
      		
+     		int select_id = todo_id;
+    		request.setAttribute("select_id", select_id);
+     		
  			List<Todo> todoList = manager.findNotSelectTodoList(todo_date, todo_id, user_id);
- 			request.setAttribute("todoList", todoList);	
+ 			request.setAttribute("todoList", todoList);
+ 			request.setAttribute("date", todo_date);	
     
  			return "/todo/modifyDateForm.jsp";  
     		 

@@ -15,7 +15,7 @@ public class CheckTodoController implements Controller{
 		
 		TodoManager todoManager = TodoManager.getInstance();
 		
-		// Ã¼Å©¸¦ ÇÑ °æ¿ì
+		// Ã¼Å©ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½
 		if(request.getServletPath().equals("/todo/doCheck")) {
 			todoManager.updateIs_done(todo_id, 0);
 		} else {

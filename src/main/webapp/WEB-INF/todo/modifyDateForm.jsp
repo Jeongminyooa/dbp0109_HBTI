@@ -70,6 +70,7 @@ function modifyDateTodo() {
 					<span><a onClick='modifyDateTodo()' id="a-deco">&nbsp;수정&nbsp;</a></span>
 					<span>&nbsp;<a id="a-deco_icon" href="<c:url value="/todo/date/delete">
 									<c:param name="todo_id" value='${selectTodo.todo_id}'/>
+									<c:param name="select_id" value='${select_id}'/>
 									<c:param name="todo_date" value='${selectTodo.todo_date }'/>
 									</c:url>"><i class="far fa-trash-alt"></i></a></span></div>
 			</form>						
@@ -82,6 +83,7 @@ function modifyDateTodo() {
 						<a id="a-deco_icon" 
 								href="<c:url value="/todo/date/delete">
 									<c:param name="todo_id" value='${todo.todo_id }'/>
+									<c:param name="select_id" value='${select_id}'/>
 									<c:param name="todo_date" value='${todo.todo_date }'/>
 									</c:url>"><i class="far fa-trash-alt"></i></a>
 					</div>
@@ -91,12 +93,10 @@ function modifyDateTodo() {
 			</div>
 			
 			<p>
-			<c:forEach var="todo" items="${todoList}">
-				<a id="a-deco" 
-								href="<c:url value="/todo/date">
-									<c:param name="todo_date" value='${todo.todo_date }'/>
-									</c:url>">완료</a>
-				</c:forEach>
+			 <a id="a-deco" 
+					href="<c:url value="/todo/dateOk">
+					<c:param name="date" value='${date}'/>	
+					</c:url>">완료</a>
 		</div>
 	</div>
 
