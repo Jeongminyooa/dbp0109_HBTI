@@ -3,7 +3,7 @@ package model.service;
 import java.sql.SQLException;
 import java.util.List;
 import model.Todo;
-import model.dao.TodoDAO;
+import model.dao.mybatis.TodoDAO;
 import model.service.exception.TodoNotFoundException;
 
 public class TodoManager {
@@ -26,17 +26,12 @@ public class TodoManager {
 			return dbp_HBTI;
 		}
 		
-		public Todo create(Todo todo) throws SQLException {
-			return todoDAO.create(todo);
-		}
-
-		
 		public int addTodo(Todo todo) throws SQLException {
-			return todoDAO.add(todo);
+			return todoDAO.addTodo(todo);
 		}
 
-		public int update(int todo_id, String content) throws SQLException {
-			return todoDAO.update(todo_id, content);
+		public int updateTodo(int todo_id, String content) throws SQLException {
+			return todoDAO.updateTodo(content, todo_id);
 		}	
 
 		public int updateIs_done(int todo_id, int is_done) throws SQLException {
@@ -52,8 +47,8 @@ public class TodoManager {
 			return todoDAO.findDateTodoList(date1, user_id);
 		}
 		
-		public List<Todo> findTodoList(String user_id) throws SQLException {
-			return todoDAO.findTodoList(user_id);
+		public List<Todo> findTodoListByUserId(String user_id) throws SQLException {
+			return todoDAO.findTodoListByUserId(user_id);
 		}
 		public Todo findTodo(java.util.Date date, int todo_id, String user_id) throws SQLException {
 			java.sql.Date date1 = new java.sql.Date(date.getTime());
@@ -63,10 +58,10 @@ public class TodoManager {
 		public Todo findTodo(int todo_id, String user_id) throws SQLException {
 			return todoDAO.findTodo(todo_id, user_id);
 		}
-		// ���� ���θ� ������ ���θ���Ʈ
+
 		public List<Todo> findNotSelectTodoList(java.util.Date date, int todo_id, String user_id) throws SQLException {
 			java.sql.Date date1 = new java.sql.Date(date.getTime());
-			return todoDAO.findNotSelectTodoList(date1, todo_id, user_id);
+			return todoDAO.findNotSelectTodoListByDate(date1, todo_id, user_id);
 		}
 		
 		public List<Todo> findNotSelectTodoList(int todo_id, String user_id) throws SQLException {
@@ -77,7 +72,7 @@ public class TodoManager {
 			return this.todoDAO;
 		}
 
-		public java.sql.Date findDate(int todo_id) throws SQLException {
+		public java.sql.Date findDateByTodoID(int todo_id) throws SQLException {
 			return todoDAO.findDate(todo_id);
 		}
 }

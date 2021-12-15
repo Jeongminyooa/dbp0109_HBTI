@@ -26,7 +26,7 @@ public class ModifyTodoController implements Controller {
     	 if (request.getServletPath().equals("/todo/modify")) {
 				int todo_id = Integer.parseInt(request.getParameter("select_id"));
 				String content = request.getParameter("content");
-				manager.update(todo_id, content);
+				manager.updateTodo(todo_id, content);
 				
 				return "redirect:/todo/view";	
     	 }
@@ -34,9 +34,9 @@ public class ModifyTodoController implements Controller {
     	 else if (request.getServletPath().equals("/todo/date/modify")) {
 				int todo_id = Integer.parseInt(request.getParameter("select_id"));
 				String content = request.getParameter("content");
-				manager.update(todo_id, content);
+				manager.updateTodo(todo_id, content);
 				
-				Date todo_date = manager.findDate(todo_id);
+				Date todo_date = manager.findDateByTodoID(todo_id);
 	 			List<Todo> todoList = manager.findDateTodoList(todo_date, user_id);
 	 			request.setAttribute("todoList", todoList);		
 	 			request.setAttribute("date", todo_date);
@@ -46,8 +46,7 @@ public class ModifyTodoController implements Controller {
 				
  	
     	 else if (request.getServletPath().equals("/todo/modifyForm")){
-    		 
-    		// ������ ���� ������ ����
+    	
     		int todo_id = Integer.parseInt(request.getParameter("todo_id"));
     	
     		Todo selectTodo = manager.findTodo(todo_id, user_id);

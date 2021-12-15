@@ -23,7 +23,7 @@ public class ViewTodoController implements Controller {
 		TodoManager manager = TodoManager.getInstance();
 		
 		if(request.getServletPath().equals("/todo/view")) {
-			List<Todo> todoList = manager.findTodoList(user_id);				
+			List<Todo> todoList = manager.findTodoListByUserId(user_id);				
 		
 			request.setAttribute("todoList", todoList);
 

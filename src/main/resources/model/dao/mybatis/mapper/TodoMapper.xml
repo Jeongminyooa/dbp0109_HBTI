@@ -31,12 +31,12 @@
       <![CDATA[
        SELECT todo_id, content, todo_date, user_id, is_done
           FROM TODO
-          WHERE todo_date >= todo_date = #{todo_date} AND todo_date < todo_date = #{todo_date} + 1 AND user_id = #{user_id}
+          WHERE todo_date >= #{todo_date} AND todo_date < #{todo_date} + 1 AND user_id = #{user_id}
       ]]>   
    </select>
 
 
-   <select id="findTodoListByUserId" parameterType="int"
+   <select id="findTodoListByUserId" parameterType="String"
    resultType="Todo">
       <![CDATA[
        SELECT todo_id, content, todo_date, user_id, is_done
@@ -49,7 +49,7 @@
       <![CDATA[
        SELECT todo_id, content, todo_date, is_done
           FROM TODO
-          WHERE todo_date >= todo_date = #{todo_date} AND todo_date < todo_date = #{todo_date} + 1 AND todo_id = #{todo_id} AND user_id = #{user_id} 
+          WHERE todo_date >=  #{todo_date} AND todo_date <  #{todo_date} + 1 AND todo_id = #{todo_id} AND user_id = #{user_id} 
       ]]>   
    </select>   
    
@@ -65,7 +65,7 @@
       <![CDATA[
        SELECT todo_id, content, todo_date, user_id, is_done
           FROM TODO
-          WHERE todo_date >= todo_date = #{todo_date} AND todo_date < todo_date = #{todo_date} + 1 AND NOT todo_id = #{todo_id} AND user_id = #{user_id} 
+          WHERE todo_date >= #{todo_date} AND todo_date < #{todo_date} + 1 AND NOT todo_id = #{todo_id} AND user_id = #{user_id} 
       ]]>   
    </select>   
    
@@ -73,16 +73,17 @@
       <![CDATA[
        SELECT todo_id, content, todo_date, user_id, is_done
           FROM TODO
-          WHERE WHERE todo_date >= TO_DATE(SYSDATE) AND NOT todo_id = #{todo_id} AND user_id = #{user_id}
+          WHERE todo_date >= TO_DATE(SYSDATE) AND NOT todo_id = #{todo_id} AND user_id = #{user_id}
       ]]>   
    </select>  
    
-   <delete id="deleteUserAllTodo" parameterType="int">
+   <delete id="deleteUserAllTodo" parameterType="String">
       DELETE FROM TODO
       WHERE user_id = #{user_id}
    </delete>
    
-   <select id="findDateByTodoID" parameterType="int">
+   <select id="findDateByTodoID" parameterType="int"
+    resultType ="java.sql.Date">
        SELECT todo_date
         FROM TODO
         WHERE todo_id = #{todo_id}

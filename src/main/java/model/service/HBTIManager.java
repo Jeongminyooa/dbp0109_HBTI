@@ -33,7 +33,7 @@ public class HBTIManager {
 		return hbtiDAO.findHbtiName(hbti_id);
 	}
 	
-	/* 이름으로 이미지 찾기 */
+
 	public String findHbtiImg(String name) throws SQLException {
 		return hbtiDAO.findHbtiImg(name);
 	}
